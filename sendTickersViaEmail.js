@@ -14,37 +14,28 @@ const missingEmailFieldResponse = {
   body: JSON.stringify({message: "Missing mandatory 'email' field."})
 };
 
-module.exports.handle = async event => {
+const errorResponse = {
+  statusCode: 500,
+  body: JSON.stringify({message: "Failed to send email."})
+};
 
+const successResponse = {
+  statusCode: 200,
+  body: JSON.stringify({message: "Email sent successfully!"})
+};
+
+module.exports.handle = async event => {
   if (event.body) {
-    let body = JSON.parse(event.body);
-    let toEmail = body.email;
+    const body = JSON.parse(event.body);
+    const toEmail = body.email;
 
     if (toEmail) {
       return sendEmail(toEmail)
-        .then(async res => {
-          let responseMessage;
-
-          if (res.ok) {
-            responseMessage = 'Email sent successfully!';
-          } else {
-            console.error('Failed to send email. Status Code: ' + res.status + ', Body: ' + await res.text());
-
-            responseMessage = 'Failed to send email.';
-          }
-
-          return {
-            statusCode: res.status,
-            body: JSON.stringify({message: responseMessage})
-          };
-        })
+        .then(res => successResponse)
         .catch(err => {
           console.error(err);
-
-          return {
-            statusCode: 500,
-            body: JSON.stringify({message: "Failed to send email."})
-          };
+    
+          return errorResponse; 
         });
     } else {
       return missingEmailFieldResponse;
@@ -69,5 +60,12 @@ function sendEmail(toEmail) {
     method: 'POST', 
     body: emailForm,
     headers: headers
+  })
+  .then(res => {
+    if (!res.ok) {
+      throw new Error("Failed to send email.");
+    }
+
+    return res;
   });
 };

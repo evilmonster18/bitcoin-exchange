@@ -2,6 +2,11 @@
 
 const fetch = require('node-fetch');
 
+const errorResponse = {
+  statusCode: 500,
+  body: JSON.stringify({message: "Failed to get average BTC to USD exchange rate."})
+};
+
 module.exports.handle = async event => {
   return getAverageBTCtoUSDExchangeRate()
     .then(btcUsdExchangeRate => {
@@ -13,10 +18,7 @@ module.exports.handle = async event => {
     .catch(err => {
       console.error(err);
 
-      return {
-        statusCode: 500,
-        body: JSON.stringify({message: "Failed to get average BTC to USD exchange rate."})
-      }; 
+      return errorResponse; 
     })
 };
 
