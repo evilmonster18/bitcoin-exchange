@@ -4,6 +4,11 @@ frameworkVersion: "2"
 provider:
   name: aws
   runtime: nodejs12.x
+  iamRoleStatements:
+    - Effect: "Allow"
+      Action:
+        - lambda:InvokeFunction
+      Resource: "arn:aws:lambda:us-east-1:109088527582:function:bitcoin-exchange-dev-averageTickers"
 
 functions:
   averageTickers:
