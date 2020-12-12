@@ -1,0 +1,26 @@
+{
+  "name": "bitcoin-exchange",
+  "version": "1.0.0",
+  "description": "This application gets the average exchange rate of BTC to USD and sends an email with it.",
+  "dependencies": {
+    "aws-sdk": "^2.806.0",
+    "node-fetch": "^2.6.1"
+  },
+  "devDependencies": {
+    "jest": "^26.6.3",
+    "jest-when": "^3.0.1"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/evilmonster18/bitcoin-exchange.git"
+  },
+  "author": "Tiago Silva",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/evilmonster18/bitcoin-exchange/issues"
+  },
+  "homepage": "https://github.com/evilmonster18/bitcoin-exchange#readme"
+}
