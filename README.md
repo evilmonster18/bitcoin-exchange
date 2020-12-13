@@ -6,6 +6,8 @@ This application gets the average exchange rate of BTC to USD and sends an email
 * serverless: Build and deploy functions to AWS Lambda
 * url: Use `URLSearchParams` to specify form data for the Mailgun API
 * util: Convert AWS Lambda function invoke from callback-based to Promise-based
+* jest: Framework to test the functions
+* jest-when: Extension to `jest` to allow mocking functions with given arguments
 
 # How to Deploy Project
 1. In case you don't have the serverless framework installed yet, run `npm install -g serverless` to install it.
